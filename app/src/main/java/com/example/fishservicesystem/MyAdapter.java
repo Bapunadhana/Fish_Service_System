@@ -1,6 +1,7 @@
 package com.example.fishservicesystem;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class MyAdapter  extends RecyclerView.Adapter<FoodViewHolder>{
+public class MyAdapter  extends RecyclerView.Adapter<FoodViewHolder> {
+
     private Context mContext;
     private List<FoodData> myFoodList;
 
@@ -22,21 +24,30 @@ public class MyAdapter  extends RecyclerView.Adapter<FoodViewHolder>{
         this.myFoodList = myFoodList;
     }
 
-    @NonNull
     @Override
-    public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-
-        View mView= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_row_item,viewGroup,false);
+    public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_row_item, parent,false);
         return new FoodViewHolder(mView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodViewHolder holder, int i) {
-    FoodViewHolder.imageView.setImageResource(myFoodList.get(i).getItemImage());
-    FoodViewHolder.mTitle.setText(myFoodList.get(i).getItemName());
-    FoodViewHolder.mDescription.setText(myFoodList.get(i).getItemName());
-    FoodViewHolder.mPrice.setText(myFoodList.get(i).getItemName());
-     }
+    public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
+        holder.imageView.setImageResource(myFoodList.get(position).getItemImage());
+        holder.mTitle.setText(myFoodList.get(position).getItemName());
+        holder.mDescription.setText(myFoodList.get(position).getItemDescription());
+        holder.mPrice.setText(myFoodList.get(position).getItemPrice());
+
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, detail_activity.class);
+                intent.putExtra("Image", myFoodList.get(holder.getAdapterPosition()).getItemImage());
+                intent.putExtra("Description", myFoodList.get(holder.getAdapterPosition()).getItemDescription());
+
+                mContext.startActivity(intent);
+            }
+        });
+    }
 
     @Override
     public int getItemCount() {
@@ -46,12 +57,12 @@ public class MyAdapter  extends RecyclerView.Adapter<FoodViewHolder>{
 
 class FoodViewHolder extends RecyclerView.ViewHolder{
 
-    static ImageView imageView;
-    static TextView mTitle;
+     static ImageView imageView;
+     static TextView mTitle;
     static TextView mDescription;
     static TextView mPrice;
 
-    CardView mCardView;
+   static CardView mCardView;
 
     public FoodViewHolder(View itemView) {
         super(itemView);

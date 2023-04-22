@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
        myFoodList =new ArrayList<>();
 
 
-       mFoodData =new FoodData("ROHU","ndndjvjalfnadfa","Rs.850",R.drawable.fish1);
+       mFoodData =new FoodData("ROHU","FRESH WATER FISH","Rs.850",R.drawable.fish1);
         myFoodList.add(mFoodData);
-       mFoodData =new FoodData("CRAB","ndndjvjalfnadfa","Rs.1050",R.drawable.f2);
+       mFoodData =new FoodData("CALABASH","RIVER FISH","Rs.1050",R.drawable.f2);
         myFoodList.add(mFoodData);
-       mFoodData =new FoodData("PRAWN","ndndjvjalfnadfa","Rs.50",R.drawable.f3);
+       mFoodData =new FoodData("ROCKFISH","MARINE WATER FISH","Rs.50",R.drawable.f3);
         myFoodList.add(mFoodData);
-       mFoodData =new FoodData("FISH","ndndjvjalfnadfa","Rs.950",R.drawable.f4);
+       mFoodData =new FoodData("TARPON","SEA WATER FISH","Rs.950",R.drawable.f4);
         myFoodList.add(mFoodData);
 
        MyAdapter myAdapter=new MyAdapter(MainActivity.this,myFoodList);
